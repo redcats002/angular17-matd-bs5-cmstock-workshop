@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="onClickNavToggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span *ngIf="!mobileQueryMax">My App</span>
+  <span class="flex-fill"></span>
+  <div class="d-flex align-items-center">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+    >
+      <mat-icon> search </mat-icon>
+    </button>
+    <div class="verticle-divider"></div>
+    <button mat-icon-button class="example-icon">
+      <mat-icon [matBadge]="notificationCount" matBadgeColor="warn"
+        >notifications</mat-icon
+      >
+    </button>
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <img
+        class="avatar rounded-circle"
+        src="https://media.istockphoto.com/id/1361394182/photo/funny-british-shorthair-cat-portrait-looking-shocked-or-surprised.jpg?b=1&s=612x612&w=0&k=20&c=-niqIUX8Kfiyn50xgUzxxUYX6H2q9BlGc3PX5PVM-iA="
+        alt="just cat"
+      />
+      <span class="ms-2">Admin</span>
+      <!-- <mat-icon>more_vert</mat-icon> -->
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

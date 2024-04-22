@@ -1,0 +1,12 @@
+.verticle-divider {
+  height: 24px;
+  border: 1px white solid;
+  margin: 0 10px;
+}
+
+.avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  border: 1px white solid;
+}
