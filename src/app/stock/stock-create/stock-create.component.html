@@ -1,1 +1,56 @@
-<p>stock-create works!</p>
+<mat-card>
+  <form #productForm="ngForm" (submit)="onSubmit(productForm)">
+    <mat-card-header
+      class="w-100 d-flex justify-content-between align-items-center mb-3"
+    >
+      <mat-card-title> Create Product </mat-card-title>
+      <button mat-raised-button color="primary" type="submit">
+        Submit
+      </button></mat-card-header
+    >
+    <mat-divider> </mat-divider>
+    <mat-card-content class="p-3">
+      <div class="row justify-content-center align-items-center g-2">
+        <div class="col-md-6">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>name</mat-label>
+            <input ngModel name="name" matInput required />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>stock</mat-label>
+            <input ngModel name="stock" matInput required type="number" />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>price</mat-label>
+            <input ngModel name="price" matInput required type="number" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row align-items-center g-2">
+        <div class="col-md-4" *ngIf="imagePreview">
+          <img
+            [src]="imagePreview"
+            alt="imagePreview"
+            class="img-fluid border"
+          />
+        </div>
+        <div class="col-md-8">
+          <button mat-stroked-button (click)="fileInput.click()" type="button">
+            <mat-icon>photo</mat-icon>
+            <span> Select image</span>
+          </button>
+          <input
+            (change)="onPreviewImage($event)"
+            #fileInput
+            type="file"
+            accept="image/*"
+          />
+        </div>
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>
