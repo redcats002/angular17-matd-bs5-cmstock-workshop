@@ -4,7 +4,7 @@
     [mode]="mobileQueryMax.matches ? 'over' : 'side'"
     [opened]="mobileQueryMax.matches ? false : true"
   >
-    <app-side-nav />
+    <app-side-nav (close)="mobileQueryMax.matches ? sidenav.close() : null" />
   </mat-sidenav>
   <mat-sidenav-content>
     <app-header

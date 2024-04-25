@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.css'
+  styleUrl: './side-nav.component.css',
 })
 export class SideNavComponent {
+  @Output('close') navClose = new EventEmitter();
 
+  onClickNavClose() {
+    this.navClose.emit();
+  }
 }

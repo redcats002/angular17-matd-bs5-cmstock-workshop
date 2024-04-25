@@ -8,14 +8,14 @@
   <!-- @for (link of list; track link) {
   <a mat-list-item href="..." [activated]="link.isActive">{{ link }}</a>
   } -->
-  <a mat-list-item [routerLink]="['/stock']">
+  <a mat-list-item [routerLink]="['/stock']" (click)="onClickNavClose()">
     <span mat-line class="mat-h4">Stock</span>
     <img
       matListItemAvatar
       src="https://cdn-icons-png.flaticon.com/512/2979/2979677.png"
     />
   </a>
-  <a mat-list-item [routerLink]="['/shop']">
+  <a mat-list-item [routerLink]="['/shop']" (click)="onClickNavClose()">
     <span mat-line class="mat-h4">Shop</span>
     <img
       matListItemAvatar
