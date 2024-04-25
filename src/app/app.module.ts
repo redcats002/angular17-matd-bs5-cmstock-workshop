@@ -7,6 +7,8 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,7 +22,10 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { StockHomeComponent } from './stock/stock-home/stock-home.component';
 import { StockCreateComponent } from './stock/stock-create/stock-create.component';
 import { StockEditComponent } from './stock/stock-edit/stock-edit.component';
@@ -38,6 +43,8 @@ import { StockEditComponent } from './stock/stock-edit/stock-edit.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     MatAutocompleteModule,
     MatToolbarModule,
     MatIconModule,
@@ -48,6 +55,10 @@ import { StockEditComponent } from './stock/stock-edit/stock-edit.component';
     MatListModule,
     MatCardModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
 })
 export class AppModule {}
