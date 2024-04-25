@@ -15,8 +15,17 @@ export class LoadingService {
         this.hideSpinner();
       }
     });
+
+    this.determinate.subscribe((number) => {
+      if (number <= 100 && !this.overlayRef.hasAttached()) {
+        this.showSpinner();
+      } else if (number >= 100 && this.overlayRef.hasAttached()) {
+        this.hideSpinner();
+      }
+    });
   }
   intermidate: Subject<boolean> = new Subject();
+  determinate: Subject<number> = new Subject();
   private overlayRef: OverlayRef = this.createOverlay();
   private templatePortal!: TemplatePortal<any>;
   private createOverlay(): OverlayRef {

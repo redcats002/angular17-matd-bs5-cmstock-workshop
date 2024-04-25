@@ -61,11 +61,11 @@ export class StockHomeComponent implements OnInit {
       if (res.value) {
         this.networkService.deleteProduct(data.id).subscribe({
           next: (data) => {
-            Swal.fire({
-              title: 'Deleted!',
-              text: `Your Product has been deleted`,
-              icon: 'success',
-            });
+            // Swal.fire({
+            //   title: 'Deleted!',
+            //   text: `Your Product has been deleted`,
+            //   icon: 'success',
+            // });
             this.getData();
           },
           error: (errorObj) => {

@@ -4,6 +4,7 @@ import {
   HttpInterceptorFn,
   HttpResponse,
 } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingService } from 'app/services/loading.service';
 import { environment } from 'environments/environment.development';
@@ -11,46 +12,58 @@ import { catchError, delay, finalize, tap, throwError } from 'rxjs';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 export const restInterceptor: HttpInterceptorFn = (req, next) => {
-  let loadingService!: LoadingService;
+  let loadingService = inject(LoadingService);
   const url = `${environment.baseURL}/api/${req.url}`;
   const newReq = req.clone({ url });
   // console.log('REQ - restIntercetpor');
-
-  // loadingService.intermidate.next(true);
+  if (!req.reportProgress) {
+    loadingService.intermidate.next(true);
+  }
   return next(newReq).pipe(
     tap((event) => {
       // console.log('RES - restIntercetpor');
+      switch (event.type) {
+        case HttpEventType.UploadProgress:
+          if (event.total) {
+            const progress = Math.round((100 * event.loaded) / event.total);
+            loadingService.determinate.next(progress);
+          }
 
-      if (event.type === HttpEventType.Response) {
-        const config: SweetAlertOptions = {
-          toast: true,
-          showConfirmButton: false,
-          position: 'top-right',
-          icon: 'success',
-          timer: 4000,
-        };
+          break;
 
-        switch (event.status) {
-          case 200:
-            if (req.method === 'PUT')
-              Swal.fire({
-                title: 'Edit Success!',
-                ...config,
-              });
-            break;
-          case 201:
-            Swal.fire({
-              title: 'Create Success!',
-              ...config,
-            });
-            break;
-          case 204:
-            Swal.fire({
-              title: 'Delete Success!',
-              ...config,
-            });
-            break;
-        }
+        case HttpEventType.Response:
+          {
+            const config: SweetAlertOptions = {
+              toast: true,
+              showConfirmButton: false,
+              position: 'top-right',
+              icon: 'success',
+              timer: 4000,
+            };
+
+            switch (event.status) {
+              case 200:
+                if (req.method === 'PUT')
+                  Swal.fire({
+                    title: 'Edit Success!',
+                    ...config,
+                  });
+                break;
+              case 201:
+                Swal.fire({
+                  title: 'Create Success!',
+                  ...config,
+                });
+                break;
+              case 204:
+                Swal.fire({
+                  title: 'Delete Success!',
+                  ...config,
+                });
+                break;
+            }
+          }
+          break;
       }
     }),
     catchError((errorResponse: HttpErrorResponse, caught) => {
@@ -82,10 +95,10 @@ export const restInterceptor: HttpInterceptorFn = (req, next) => {
         }
       }
       return throwError(() => errorResponse);
+    }),
+    delay(1000),
+    finalize(() => {
+      loadingService.intermidate.next(false);
     })
-    // delay(1000),
-    // finalize(() => {
-    //   loadingService.intermidate.next(false);
-    // })
   );
 };

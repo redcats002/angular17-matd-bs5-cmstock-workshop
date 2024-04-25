@@ -31,14 +31,20 @@ export class NetworkService {
   addProduct(product: Product): Observable<ProductResponse> {
     return this.httpClient.post<ProductResponse>(
       `products`,
-      this.makeFormData(product)
+      this.makeFormData(product),
+      {
+        reportProgress: true,
+      }
     );
   }
 
   editProduct(id: number, product: Product): Observable<ProductResponse> {
     return this.httpClient.put<ProductResponse>(
       `products/${id}`,
-      this.makeFormData(product)
+      this.makeFormData(product),
+      {
+        reportProgress: true,
+      }
     );
   }
 

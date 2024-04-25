@@ -24,13 +24,22 @@ export class ProgressComponent implements AfterViewInit {
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private loadingService: LoadingService
-  ) {}
+  ) {
+    loadingService.intermidate.subscribe((_) => {
+      this.mode = 'indeterminate';
+    });
+
+    loadingService.determinate.subscribe((value) => {
+      this.value = value;
+      this.mode = 'determinate';
+    });
+  }
 
   @ViewChild('templatePortalContent')
   templatePortalContent!: TemplateRef<unknown>;
 
   @Input() color: ThemePalette;
-  @Input() strokeWidth!: number;
+  @Input() strokeWidth: number = 10;
   @Input() diameter: number = 100;
   @Input() mode!: ProgressSpinnerMode;
   @Input() value!: number;
