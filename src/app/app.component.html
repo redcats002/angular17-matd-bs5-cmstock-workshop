@@ -11,7 +11,9 @@
       [media_query]="mobileQueryMax.matches"
       (toggle)="sidenav.toggle()"
     />
+
     <div class="p-4">
+      <app-progress [mode]="'indeterminate'"></app-progress>
       <router-outlet />
     </div>
   </mat-sidenav-content>

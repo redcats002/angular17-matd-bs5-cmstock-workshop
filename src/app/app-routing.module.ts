@@ -3,19 +3,38 @@ import { RouterModule, Routes } from '@angular/router';
 import { StockHomeComponent } from './stock/stock-home/stock-home.component';
 import { StockEditComponent } from './stock/stock-edit/stock-edit.component';
 import { StockCreateComponent } from './stock/stock-create/stock-create.component';
+import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
   {
     path: 'stock',
-    component: StockHomeComponent,
+    children: [
+      {
+        path: '',
+        component: StockHomeComponent,
+      },
+      {
+        path: 'create',
+        component: StockCreateComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: StockEditComponent,
+      },
+    ],
   },
   {
-    path: 'stock/create',
-    component: StockCreateComponent,
+    path: 'shop',
+    component: ShopComponent,
   },
   {
-    path: 'stock/edit/:id',
-    component: StockEditComponent,
+    path: '**',
+    redirectTo: '/stock',
+  },
+  {
+    path: '',
+    redirectTo: '/stock',
+    pathMatch: 'full',
   },
 ];
 

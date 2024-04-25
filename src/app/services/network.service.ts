@@ -11,10 +11,12 @@ export class NetworkService {
   constructor(private httpClient: HttpClient) {}
 
   getProducts(): Observable<ProductResponse[]> {
-    return this.httpClient.get<ProductResponse[]>(
-      `${environment.baseURL}/products`
-    );
+    return this.httpClient.get<ProductResponse[]>(`products`);
   }
+  getProductById(id: number): Observable<ProductResponse> {
+    return this.httpClient.get<ProductResponse>(`products/${id}`);
+  }
+
   getProductImageURL(image: string): string {
     if (image) {
       return `${environment.baseURL}/images/${image}`;
@@ -23,12 +25,19 @@ export class NetworkService {
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.httpClient.delete<any>(`${environment.baseURL}/products/${id}`);
+    return this.httpClient.delete<any>(`products/${id}`);
   }
 
   addProduct(product: Product): Observable<ProductResponse> {
     return this.httpClient.post<ProductResponse>(
-      `${environment.baseURL}/products`,
+      `products`,
+      this.makeFormData(product)
+    );
+  }
+
+  editProduct(id: number, product: Product): Observable<ProductResponse> {
+    return this.httpClient.put<ProductResponse>(
+      `products/${id}`,
       this.makeFormData(product)
     );
   }

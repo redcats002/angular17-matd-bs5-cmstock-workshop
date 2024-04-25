@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { NetworkService } from 'app/services/network.service';
 import Swal from 'sweetalert2';
+import { LoadingService } from 'app/services/loading.service';
 
 @Component({
   selector: 'app-stock-home',
@@ -31,7 +32,7 @@ export class StockHomeComponent implements OnInit {
       },
 
       error: (errorObj) => {
-        alert(errorObj.error.message);
+        console.log(JSON.stringify(errorObj.error?.message));
       },
       complete: () => {
         console.log('Feed network done');
@@ -68,7 +69,7 @@ export class StockHomeComponent implements OnInit {
             this.getData();
           },
           error: (errorObj) => {
-            alert(errorObj.error.message);
+            console.log(JSON.stringify(errorObj.error?.message));
           },
         });
       }
