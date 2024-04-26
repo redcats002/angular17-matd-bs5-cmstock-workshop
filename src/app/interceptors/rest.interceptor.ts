@@ -2,10 +2,8 @@ import {
   HttpErrorResponse,
   HttpEventType,
   HttpInterceptorFn,
-  HttpResponse,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingService } from 'app/services/loading.service';
 import { environment } from 'environments/environment.development';
 import { catchError, delay, finalize, tap, throwError } from 'rxjs';
